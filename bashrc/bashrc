@@ -1,0 +1,24 @@
+alias svim='sudo vim -u ~/.vimrc '
+
+#設定shell prompt
+if [ ${UID} -eq 0 ]; then
+PS1="\[\033[1;41;37m\][\u@\h \w ]\[\033[0;37m\]\$ "
+else
+    if [ "x$YROOT_NAME" != "x" ]; then
+    PS1='\[\033[1;31m\][\[\033[1;33m\]\u\[\033[1;37m\]@\[\033[1;32m\]\h\[\033[1;37m\](\[\033[1;36m\]$YROOT_NAME\[\033[1;37m\]):\[\033[1;31m\]\W]\[\033[1;36m\]\$ \[\033[0m\]'
+    else
+    PS1='\[\033[1;31m\][\[\033[1;33m\]\u\[\033[1;37m\]@\[\033[1;32m\]\h\[\033[1;37m\]:\[\033[1;31m\]\W]\[\033[1;36m\]\$ \[\033[0m\]'
+    fi
+fi
+export PS1
+
+## oracle
+if [ -a /home/y/lib64/ora11gclient ]; then
+  export ORACLE_HOME=/home/y/lib64/ora11gclient
+  export TNS_ADMIN=/home/y/conf/oracle
+  export NLS_LANG=AMERICAN_AMERICA.UTF8
+  export NLS_DATE_FORMAT="YYYY/MM/DD HH24:MI:SS"
+  export LD_LIBRARY_PATH=/home/y/lib64/ora11gclient
+  export PATH=$ORACLE_HOME:$PATH
+  export SQLPLUS_BIN=/home/y/lib64/ora11gclient/sqlplus
+fi
